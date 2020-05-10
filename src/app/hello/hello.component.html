@@ -1,46 +1,11 @@
 <div id="body">
   <h1>{{title}}</h1>
-  <p>{{message}}</p>
-  <form [(formGroup)]="myControl" (ngSubmit)="onSubmit()">
-    <table>
-      <tr>
-        <th>Name</th>
-        <td>
-          <!--
-          name.errors != nullがない場合、正常に動かないがその理由が分からない。
-          name.errors.required、name.errors.alpha、どちらかが「!= null」の場合、「name.errors != null」は確定ではないのか。
-          name.errors.requiredはValidationErrorsのKeyとして残り続ける？
-          -->
-          <div *ngIf="name.errors != null && name.errors.required != null">Nameは必須項目です。</div>
-          <div *ngIf="name.errors != null && name.errors.alpha != null">半角アルファベッドで入力してください。</div>
-          <div><input type="text" formControlName="name"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>Mail</th>
-        <td>
-          <!--
-          mail.errors != nullを削除した場合、ageに関するバリデーションエラーの警告文が表示されなくなるのが何故か分からない。
-          -->
-          <div *ngIf="mail.errors != null && mail.errors.email != null">メールアドレスの形式で入力してください</div>
-          <div><input type="text" formControlName="mail"></div>
-        </td>
-      </tr>
-      <tr>
-        <th>age</th>
-        <td>
-          <div *ngIf="age.errors != null && age.errors.min != null">1歳以上で入力してください。</div>
-          <div *ngIf="age.errors != null && age.errors.max != null">150歳以下で入力してください。</div>
-          <div *ngIf="age.errors != null && age.errors.even != null">偶数で入力してください。</div>
-          <div><input type="number" formControlName="age"></div>
-        </td>
-      </tr>
-      <tr>
-        <th></th>
-        <td>
-          <input [disabled]="myControl.invalid" type="submit" value="click">
-        </td>
-      </tr>
-    </table>
-  </form>
+  <div>add item...</div>
+  <div>
+    <input type="text" [(ngModel)]="input1">
+    <button (click)="push()">push</button>
+    <button (click)="pop()">pop</button>
+  </div>
+  <hr>
+  <app-message [content]="message" (action)="doClick($event)"></app-message>
 </div>
